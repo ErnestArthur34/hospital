@@ -1,5 +1,5 @@
 // Lets the system open without internet. Change VERSION whenever you upload a new index.html.
-const VERSION='hms-v1',SHELL=['./','index.html','manifest.json','icon-192.png','icon-512.png','favicon.ico'],
+const VERSION='hms-v2',SHELL=['./','index.html','manifest.json','icon-192.png','icon-512.png','favicon.ico'],
 SDK=['https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js','https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js','https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>Promise.all(SHELL.concat(SDK).map(u=>c.add(u).catch(()=>{})))));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==VERSION).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
